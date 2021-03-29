@@ -14,11 +14,11 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 MANAGERS = ADMINS
 
-BASE_URL = "http://pokeapi.co"
+BASE_URL = "http://cluster.nicolevanderhoeven.com"
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [".pokeapi.co", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 TIME_ZONE = "Europe/London"
 

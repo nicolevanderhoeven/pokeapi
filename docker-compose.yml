@@ -18,6 +18,7 @@ services:
     build:
       context: .
       dockerfile: ./Resources/docker/app/Dockerfile
+    image: nvanderhoeven/pokeapi_app
     volumes:
       - .:/code
     links:
@@ -31,6 +32,7 @@ services:
     build: 
       context: ./Resources
       dockerfile: ./docker/web/Dockerfile
+    image: nvanderhoeven/pokeapi_web
     ports:
       - "80:80"
       - "443:443"
