@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: web
   name: web
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       io.kompose.service: web
@@ -23,6 +23,18 @@ spec:
       labels:
         io.kompose.service: web
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: io.kompose.service
+                  operator: In
+                  values: 
+                  - web
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - image: nvanderhoeven/pokeapi_web
           name: pokeapi-web
