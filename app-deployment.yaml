@@ -5,7 +5,7 @@ metadata:
     io.kompose.service: app
   name: app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       io.kompose.service: app
@@ -15,6 +15,18 @@ spec:
       labels:
         io.kompose.service: app
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: io.kompose.service
+                  operator: In
+                  values: 
+                  - app
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - image: nvanderhoeven/pokeapi_app
           name: pokeapi-app
