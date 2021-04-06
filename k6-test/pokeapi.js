@@ -4,7 +4,7 @@ import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 import { SharedArray } from "k6/data";
 import { NewRel } from './util/newrelic.js';
 
-const apiKey = 'cb69e37a6487a2a2a1354c5452fda14aFFFFNRAL';
+const apiKey = '';
 const nr = new NewRel(apiKey);
 
 export const options = {
