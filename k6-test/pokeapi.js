@@ -8,8 +8,8 @@ const apiKey = '';
 const nr = new NewRel(apiKey);
 
 export const options = {
-    duration: '3m',
-    vus: 50,
+    duration: '60m',
+    vus: 40,
     thresholds: {
         http_req_failed: ['rate<0.05'],
     },
