@@ -8,8 +8,8 @@ export const options = {
     ext: {
         loadimpact: {
             projectID: 3548351,
+            note: '10 users, 3 a, 2 w, 1 c'
         },
-        note: '10 users, 3 a, 1 w, 1 c'
     },
     scenarios: {
         pokeapi: {
