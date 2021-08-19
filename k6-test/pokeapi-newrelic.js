@@ -2,23 +2,21 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 import papaparse from 'https://jslib.k6.io/papaparse/5.1.1/index.js';
 import { SharedArray } from "k6/data";
+import { NewRel } from './util/newrelic.js';
 import { Pods } from 'k6/x/chaos/k8s';
 
+const apiKey = '';
+const nr = new NewRel(apiKey);
+
 export const options = {
-    ext: {
-        loadimpact: {
-            projectID: 3548351,
-        },
-        note: '10 users, removed New Relic deployment'
-    },
     scenarios: {
         pokeapi: {
             executor: 'ramping-vus',
             exec: 'catchEmAll',
             startVUs: 0,
             stages: [
-                { duration: '15m', target: 10 },
-                { duration: '45m', target: 10 },
+                { duration: '15m', target: 40 },
+                { duration: '45m', target: 40 },
             ],
             gracefulRampDown: '60s',
         },
@@ -32,9 +30,6 @@ export const options = {
     },
     thresholds: {
         http_req_failed: ['rate<0.05'],
-        load_generator_cpu_percent: ["value<=80"],
-        load_generator_memory_used_percent: ["value<=80"],
-        http_req_duration: ["p(90)<=3000"],
     },
 };
 
@@ -43,6 +38,11 @@ const sharedData = new SharedArray("Shared Logins", function() {
     let data = papaparse.parse(open('pokemon.csv'), { header: true }).data;
     return data;
 });
+
+export function setup() {
+    nr.PrintAlertingStatus();
+    nr.PrintServerHealth();
+}
 
 export function catchEmAll() {
     GetPokemon();
@@ -59,10 +59,16 @@ export function GetPokemon() {
         'is status 200': (r) => r.status === 200,
         '01-text verification': (r) => r.body.includes(randomMon.name)
     });
+    sleep(Math.random() * 5);
 }
 
 export function ThinkTime() {
     sleep(Math.random() * 5);
+}
+
+export function teardown(data) {
+    nr.PrintAlertingStatus();
+    nr.PrintServerHealth();
 }
 
 export function killPod() {

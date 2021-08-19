@@ -102,29 +102,4 @@ export class NewRel {
 
     return result;
   }
-
-  //Send a deployment marker with start/end information on load test.
-//   Notify(testName, state, description, user) {
-//     var url =
-//       'https://api.newrelic.com/v2/applications/' + this.AppID() + '/deployments.json';
-//     console.log(url);
-
-//     // From NerdGraph, copy the GraphQL payload from tools > copy as cURL > take the entire {"query"} section
-//     let payload = JSON.stringify({
-//       deployment: {
-//         revision: testName,
-//         changelog: 'k6 load test ' + state,
-//         description: description,
-//         user: user,
-//       },
-//     });
-
-//     let res = http.post(url, payload, this.params);
-//     // Check we are not experiencing HTTP 400. If you are, the payload is likely wrong.
-//     if (![200, 201].includes(res.status)) {
-//       throw new Error(`Could not notify New Relic about test state (res: ${res.status})`)
-//     }
-    
-//     return JSON.stringify(res.status);
-//   }
 }
