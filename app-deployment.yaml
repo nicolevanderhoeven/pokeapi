@@ -31,4 +31,11 @@ spec:
         - image: nvanderhoeven/pokeapi_app
           name: pokeapi-app
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "140Mi"
+              cpu: "300m"
+            limits:
+              memory: "150Mi"
+              cpu: "700m"
       restartPolicy: Always

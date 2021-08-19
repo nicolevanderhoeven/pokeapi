@@ -19,7 +19,13 @@ spec:
       containers:
         - image: redis:alpine
           name: cache
-          resources: {}
+          resources: 
+            requests:
+              memory: "50Mi"
+              cpu: "50m"
+            limits:
+              memory: "60Mi"
+              cpu: "100m"
           volumeMounts:
             - mountPath: /data
               name: redis-data

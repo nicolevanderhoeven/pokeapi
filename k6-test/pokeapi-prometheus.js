@@ -24,9 +24,9 @@ export const options = {
           apm: [
             {
               provider: "prometheus",
-              remoteWriteURL: "https://metric-api.newrelic.com/prometheus/v1/write?prometheus_server=prometheus-1",
+              remoteWriteURL: "",
               credentials: {
-                token: "d16a82ab1334c326e1bc54ce2019248cfba1NRAL"
+                token: ""
               },
               metrics: ["http_req_duration", "http_req_failed"],
               includeDefaultMetrics: true,

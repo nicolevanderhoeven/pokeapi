@@ -9,7 +9,7 @@ export const options = {
         loadimpact: {
             projectID: 3548351,
         },
-        note: '10 users, removed New Relic deployment'
+        note: '10 users, 3 a, 1 w, 1 c'
     },
     scenarios: {
         pokeapi: {
