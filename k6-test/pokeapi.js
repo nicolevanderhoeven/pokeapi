@@ -8,7 +8,7 @@ export const options = {
     ext: {
         loadimpact: {
             projectID: 3548351,
-            note: '10 users, 3 a, 2 w, 1 c'
+            note: '3 a, 2 w, 1 c'
         },
     },
     scenarios: {
@@ -17,24 +17,24 @@ export const options = {
             exec: 'catchEmAll',
             startVUs: 0,
             stages: [
-                { duration: '15m', target: 10 },
-                { duration: '45m', target: 10 },
+                { duration: '1m', target: 10 },
+                { duration: '5m', target: 10 },
             ],
             gracefulRampDown: '60s',
         },
-        // chaos: {
-        //     executor: 'per-vu-iterations',
-        //     exec: 'killPod',
-        //     vus: 1,
-        //     iterations: 1,
-        //     startTime: '30m',
-        // },
+        chaos: {
+            executor: 'per-vu-iterations',
+            exec: 'killPod',
+            vus: 1,
+            iterations: 1,
+            startTime: '5s',
+        },
     },
     thresholds: {
-        http_req_failed: ['rate<0.05'],
+        http_req_failed: ['rate<=0.05'],
         load_generator_cpu_percent: ["value<=80"],
         load_generator_memory_used_percent: ["value<=80"],
-        http_req_duration: ["p(90)<=3000"],
+        http_req_duration: ["p(95)<=5000"],
     },
 };
 
@@ -74,7 +74,7 @@ export function killPod() {
         victim = pod.list()[i];
         console.log('in loop', i, ': victim:', victim);
         // Choose a pod with a name starting with a substring to kill.
-        if (victim.startsWith('web')) {
+        if (victim.startsWith('app')) {
             console.log('Victim chosen:', victim);
             break;
         }

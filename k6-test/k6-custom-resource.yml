@@ -1,0 +1,11 @@
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: k6-poketest
+spec:
+  parallelism: 5
+  script: 
+    configMap: 
+      name: poketest
+      file: test.js
+  arguments: -out cloud
